@@ -1,0 +1,338 @@
+/* =========================================================
+   FacturaFácil — sistema visual
+   Paleta: tinta (navy) + papel (cálido) + acento tipo "sello"
+   Tipografía: Fraunces (display) / Inter (UI) / IBM Plex Mono (cifras)
+   ========================================================= */
+
+:root{
+  --ink: #1B2431;
+  --ink-2: #2E3A4E;
+  --paper: #FBF9F5;
+  --paper-line: #E7E1D2;
+  --text: #22262B;
+  --muted: #6B7280;
+  --accent: #2F6F4E;      /* personalizable desde Ajustes */
+  --accent-ink: #ffffff;
+  --accent-soft: #E4EEE8;
+  --danger: #B3423A;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(27,36,49,.06), 0 8px 24px rgba(27,36,49,.08);
+  font-synthesis: none;
+}
+
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:#F1EEE7;
+  color:var(--text);
+  font-family:'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  margin:0 0 .2em;
+  letter-spacing:-.01em;
+}
+.muted{color:var(--muted);}
+.small{font-size:.82rem;}
+.hidden{display:none !important;}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;font-size:.95rem;}
+
+/* ---------- Botones ---------- */
+.btn{
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:.65rem 1.1rem;
+  font-weight:600;
+  font-size:.9rem;
+  transition:transform .1s ease, box-shadow .15s ease, background .15s ease;
+  background:var(--ink);
+  color:#fff;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:var(--accent-ink);}
+.btn-primary:hover{box-shadow:var(--shadow);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--paper-line);}
+.btn-ghost:hover{background:#fff;}
+.btn-sm{padding:.4rem .8rem;font-size:.82rem;}
+.btn-block{width:100%;}
+
+/* ---------- Login ---------- */
+.login-screen{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(47,111,78,.16), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(27,36,49,.14), transparent 45%),
+    var(--ink);
+  padding:1.5rem;
+}
+.login-card{
+  background:var(--paper);
+  border-radius:20px;
+  padding:2.4rem 2rem;
+  width:100%;max-width:400px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  text-align:center;
+}
+.login-brand{margin-bottom:1.6rem;}
+.login-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:56px;height:56px;border-radius:16px;
+  background:var(--accent);color:#fff;
+  font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;
+  margin-bottom:.8rem;
+}
+.login-brand h1{font-size:1.6rem;}
+.login-brand p{color:var(--muted);font-size:.92rem;margin-top:.3rem;}
+.g-btn-wrap{display:flex;justify-content:center;margin-bottom:.8rem;min-height:44px;}
+.login-note{font-size:.76rem;color:var(--muted);margin-top:1.2rem;line-height:1.4;}
+
+/* ---------- Estructura de la app ---------- */
+.app{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  grid-template-rows:64px 1fr;
+  grid-template-areas:"top top" "side main";
+  min-height:100vh;
+}
+.topbar{
+  grid-area:top;
+  background:var(--ink);
+  color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.4rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Fraunces',serif;}
+.brand-mark{
+  width:32px;height:32px;border-radius:8px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;
+}
+.brand-logo{width:32px;height:32px;border-radius:8px;object-fit:cover;}
+.topbar-actions{display:flex;align-items:center;gap:.8rem;}
+.user-chip{font-size:.85rem;color:#D7DCE3;}
+.topbar .btn-ghost{color:#fff;border-color:rgba(255,255,255,.25);}
+.topbar .btn-ghost:hover{background:rgba(255,255,255,.08);}
+
+.sidenav{
+  grid-area:side;
+  background:#fff;
+  border-right:1px solid var(--paper-line);
+  padding:1.2rem .7rem;
+  display:flex;flex-direction:column;gap:.2rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:.7rem;
+  background:none;border:none;
+  padding:.7rem .8rem;border-radius:var(--radius-sm);
+  color:var(--muted);font-weight:600;font-size:.9rem;
+  text-align:left;
+}
+.nav-item svg{width:19px;height:19px;fill:currentColor;flex-shrink:0;}
+.nav-item:hover{background:#F5F3EE;}
+.nav-item.active{background:var(--accent-soft);color:var(--accent);}
+
+.bottomnav{display:none;}
+
+.main{
+  grid-area:main;
+  padding:1.6rem 2rem 3rem;
+  max-width:1100px;
+  width:100%;
+}
+.panel-head{margin-bottom:1.2rem;}
+.panel-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+
+/* ---------- Panel / estadísticas ---------- */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;
+}
+.stat-card{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius);
+  padding:1.1rem 1.2rem;
+}
+.stat-num{
+  display:block;font-family:'IBM Plex Mono',monospace;font-size:1.9rem;font-weight:600;color:var(--ink);
+}
+.stat-label{font-size:.82rem;color:var(--muted);}
+
+.order-list{display:flex;flex-direction:column;gap:.6rem;}
+.order-row{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+  padding:.8rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.order-row .who{font-weight:600;}
+.order-row .when{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--muted);}
+.empty-note{color:var(--muted);font-size:.9rem;padding:1rem 0;}
+
+/* ---------- Filtros / búsqueda ---------- */
+.filter-row{display:flex;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+.filter-row input, .filter-row select{
+  padding:.6rem .8rem;border:1px solid var(--paper-line);border-radius:var(--radius-sm);background:#fff;
+}
+.filter-row input{flex:1;min-width:180px;}
+#client-search{
+  width:100%;padding:.6rem .8rem;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+  margin-bottom:1rem;background:#fff;
+}
+
+/* ---------- Tabla de facturas ---------- */
+.invoice-table{display:flex;flex-direction:column;gap:.5rem;}
+.invoice-row{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+  padding:.8rem 1rem;display:grid;
+  grid-template-columns:auto 1fr auto auto auto;
+  align-items:center;gap:1rem;
+}
+.invoice-row .num{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+.invoice-row .status-pill{
+  font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  padding:.25rem .6rem;border-radius:999px;
+}
+.status-pendiente{background:#FBEBDD;color:#9A5B22;}
+.status-aceptada{background:var(--accent-soft);color:var(--accent);}
+.status-pagada{background:#DDE7F7;color:#2E4E8F;}
+.invoice-row .amount{font-family:'IBM Plex Mono',monospace;font-weight:600;}
+.row-actions{display:flex;gap:.4rem;}
+.icon-btn{
+  background:none;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+  width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:.9rem;
+}
+.icon-btn:hover{background:#F5F3EE;}
+
+/* ---------- Clientes ---------- */
+.client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.8rem;}
+.client-card{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius);
+  padding:1rem;
+}
+.client-card .name{font-weight:700;margin-bottom:.2rem;}
+.client-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:.1rem;}
+.client-card .card-actions{margin-top:.7rem;display:flex;gap:.4rem;}
+
+/* ---------- Configuración ---------- */
+.config-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+.config-card{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius);padding:1.1rem 1.2rem;
+}
+.config-card label{display:block;font-size:.82rem;font-weight:600;color:var(--muted);margin-top:.7rem;}
+.config-card input, .config-card textarea{
+  width:100%;margin-top:.3rem;padding:.55rem .7rem;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+}
+.logo-preview-wrap{
+  width:100%;height:90px;border:1px dashed var(--paper-line);border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;margin-bottom:.6rem;overflow:hidden;background:#FAFAF8;
+}
+.logo-preview{max-height:80px;max-width:90%;object-fit:contain;}
+.logo-placeholder{color:var(--muted);font-size:.85rem;}
+#cfg-logo-input{margin-top:.4rem;}
+.color-row{display:flex;gap:.5rem;margin:.6rem 0;flex-wrap:wrap;}
+.color-swatch{
+  width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--paper-line);
+}
+.color-swatch.selected{box-shadow:0 0 0 2px var(--ink);}
+
+/* ---------- Modales ---------- */
+.modal{
+  position:fixed;inset:0;background:rgba(27,36,49,.55);
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:2rem 1rem;overflow-y:auto;z-index:50;
+}
+.modal-card{
+  background:#fff;border-radius:var(--radius);padding:1.4rem 1.5rem;width:100%;max-width:440px;
+}
+.modal-card-lg{max-width:640px;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.modal-card label{display:block;font-size:.82rem;font-weight:600;color:var(--muted);margin-top:.7rem;}
+.modal-card input, .modal-card select, .modal-card textarea{
+  width:100%;margin-top:.3rem;padding:.6rem .7rem;border:1px solid var(--paper-line);border-radius:var(--radius-sm);
+}
+.modal-actions{display:flex;justify-content:flex-end;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;}
+
+.invoice-item-row{display:grid;grid-template-columns:1fr 70px 100px 32px;gap:.5rem;margin-top:.5rem;align-items:center;}
+.invoice-item-row input{margin-top:0;}
+.invoice-totals{
+  display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:1.1rem;
+}
+
+/* ---------- Papel de factura (firma visual del diseño) ---------- */
+.invoice-paper{
+  background:var(--paper);
+  border-radius:2px;
+  padding:2rem 2rem 1.6rem;
+  position:relative;
+  background-image: repeating-linear-gradient(to right, transparent 0 11px, rgba(27,36,49,.05) 11px 12px);
+  background-position:0 0;
+  border-top:6px dashed var(--paper-line);
+}
+.invoice-paper-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;}
+.invoice-biz{display:flex;align-items:center;gap:.7rem;}
+.paper-logo{width:44px;height:44px;object-fit:contain;border-radius:8px;}
+.paper-biz-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;}
+.paper-biz-sub{font-size:.8rem;color:var(--muted);}
+.invoice-meta{text-align:right;}
+.invoice-meta-num{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;color:var(--ink);}
+
+.paper-stamp{
+  position:absolute;top:1.6rem;right:2rem;
+  border:3px solid var(--danger);color:var(--danger);
+  font-family:'Fraunces',serif;font-weight:700;font-size:1rem;letter-spacing:.08em;
+  padding:.3rem .9rem;border-radius:8px;transform:rotate(-8deg);
+  opacity:.85;
+}
+.paper-stamp.stamp-aceptada{border-color:var(--accent);color:var(--accent);}
+.paper-stamp.stamp-pagada{border-color:#2E4E8F;color:#2E4E8F;}
+
+.invoice-client-block{margin:1.4rem 0 1rem;}
+.paper-client-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
+
+.invoice-items-table{width:100%;border-collapse:collapse;margin-top:.6rem;}
+.invoice-items-table th{
+  text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  border-bottom:1px solid var(--paper-line);padding:.4rem 0;
+}
+.invoice-items-table td{padding:.5rem 0;border-bottom:1px solid var(--paper-line);font-size:.92rem;}
+.invoice-items-table th:last-child, .invoice-items-table td:last-child,
+.invoice-items-table th:nth-child(2), .invoice-items-table td:nth-child(2),
+.invoice-items-table th:nth-child(3), .invoice-items-table td:nth-child(3){text-align:right;}
+
+.invoice-total-row{
+  display:flex;justify-content:flex-end;gap:.8rem;margin-top:.8rem;
+  font-family:'IBM Plex Mono',monospace;font-size:1.2rem;font-weight:600;
+  border-top:2px solid var(--ink);padding-top:.6rem;
+}
+.paper-notes{margin-top:1rem;font-size:.85rem;color:var(--muted);white-space:pre-wrap;}
+.invoice-footer{margin-top:1.6rem;text-align:center;font-size:.78rem;color:var(--muted);font-style:italic;}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px){
+  .app{
+    grid-template-columns:1fr;
+    grid-template-rows:60px 1fr 62px;
+    grid-template-areas:"top" "main" "bottom";
+  }
+  .sidenav{display:none;}
+  .bottomnav{
+    display:flex;grid-area:bottom;background:#fff;border-top:1px solid var(--paper-line);
+    justify-content:space-around;align-items:center;padding:.3rem 0;
+  }
+  .bottomnav .nav-item{flex-direction:column;gap:.15rem;font-size:.65rem;padding:.4rem .3rem;flex:1;text-align:center;align-items:center;}
+  .bottomnav .nav-item svg{width:20px;height:20px;}
+  .main{padding:1rem 1rem 1.4rem;}
+  .grid-2{grid-template-columns:1fr;}
+  .invoice-row{grid-template-columns:1fr 1fr;grid-template-areas:"num status" "amount actions" "date date";}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body *{visibility:hidden;}
+  #invoice-paper, #invoice-paper *{visibility:visible;}
+  #invoice-paper{position:absolute;top:0;left:0;width:100%;border-top:none;}
+  .no-print, .no-print *{display:none !important;}
+}
