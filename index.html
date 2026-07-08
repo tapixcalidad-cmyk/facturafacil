@@ -13,8 +13,11 @@
 
 <link rel="stylesheet" href="css/style.css">
 
-<!-- Google Identity Services (inicio de sesión con Google) -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<!-- Firebase (autenticación con Google + base de datos en la nube) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
 <!-- Librerías para exportar la factura a PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -30,12 +33,17 @@
       <p>Tus facturas, clientes y pedidos, siempre a la mano.</p>
     </div>
 
-    <div id="g_id_signin_container" class="g-btn-wrap"></div>
+    <button id="btn-google-login" class="btn btn-google btn-block">Iniciar sesión con Google</button>
+    <p id="firebase-warning" class="login-note hidden">
+      Configura Firebase en <code>js/firebase-config.js</code> para activar el inicio de sesión con Google y la sincronización en la nube.
+    </p>
 
-    <button id="btn-local-login" class="btn btn-ghost btn-block">Continuar sin cuenta de Google</button>
+    <div class="login-divider"><span>o</span></div>
+
+    <button id="btn-local-login" class="btn btn-ghost btn-block">Continuar sin cuenta (solo este dispositivo)</button>
 
     <p class="login-note">
-      Tus datos se guardan únicamente en este navegador/dispositivo. Nada se envía a un servidor externo.
+      Con Google, tus facturas y clientes se guardan en la nube y puedes verlos desde cualquier dispositivo. Sin cuenta, todo se guarda únicamente en este navegador.
     </p>
   </div>
 </section>
@@ -51,6 +59,7 @@
       <strong id="brand-name">FacturaFácil</strong>
     </div>
     <div class="topbar-actions">
+      <span id="sync-status" class="sync-status"></span>
       <span id="user-chip" class="user-chip"></span>
       <button id="btn-logout" class="btn btn-ghost btn-sm">Salir</button>
     </div>
